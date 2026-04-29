@@ -1,10 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { runAllScans } from "@/lib/scanners";
-import { scoreFindings } from "@/lib/scoring/engine";
+import { scheduleScanCompletion } from "@/lib/scan-background";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeDomain } from "@/lib/utils";
+
+/** Tarama arka planda biter; hemen `scanId` döner (UI için API route tercih edilir). */
 export async function runSecurityScan(domain: string): Promise<{
   ok: boolean;
   scanId?: string;
@@ -37,38 +38,14 @@ export async function runSecurityScan(domain: string): Promise<{
     return { ok: false, error: insertError?.message ?? "Kayıt oluşturulamadı" };
   }
 
-  const scanId = row.id;
+  scheduleScanCompletion({
+    scanId: row.id,
+    userId: user.id,
+    domain: normalized,
+  });
 
-  try {
-    const { findings, raw } = await runAllScans(normalized);
-    const { score } = scoreFindings(findings);
+  revalidatePath("/dashboard");
+  revalidatePath("/scan");
 
-    await supabase
-      .from("scans")
-      .update({
-        status: "completed",
-        score,
-        findings: findings as unknown as Record<string, unknown>[],
-        raw_payload: raw as unknown as Record<string, unknown>,
-        completed_at: new Date().toISOString(),
-      })
-      .eq("id", scanId);
-
-    revalidatePath("/dashboard");
-    revalidatePath("/scan");
-    revalidatePath(`/scan/${scanId}`);
-    return { ok: true, scanId };
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Tarama hatası";
-    await supabase
-      .from("scans")
-      .update({
-        status: "failed",
-        error_message: msg,
-        completed_at: new Date().toISOString(),
-      })
-      .eq("id", scanId);
-    revalidatePath("/dashboard");
-    return { ok: false, error: msg, scanId };
-  }
+  return { ok: true, scanId: row.id };
 }
