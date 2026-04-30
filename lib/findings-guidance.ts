@@ -36,6 +36,80 @@ const BY_ID: Record<string, FindingGuidance> = {
       "Domain sağlayıcınızdan sitenizin doğru sunucu adresine (A veya AAAA kaydı) yönlendirildiğini kontrol ettirin.",
     risk: "Siteniz ziyaretçilere açılmıyor olabilir. Bu durum iş kaybına ve güvenilirlik sorununa yol açar.",
   },
+  "dns-scan-timeout": {
+    remediation: "Birkaç dakika sonra yeniden tarayın; sorun sürerse DNS ve güvenlik duvarı ayarlarını hosting ile kontrol edin.",
+    risk: "Bu turda DNS sonuçları alınamadı; e-posta ve site güvenliği hakkında eksik bilgi kalabilir.",
+  },
+  "dns-scan-error": {
+    remediation: "Alan adının doğru yazıldığını ve dış DNS erişiminin açık olduğunu doğrulayın; gerekirse yeniden tarayın.",
+    risk: "DNS analizi yapılamadı; gerçek yapılandırma bilinmeden kalır.",
+  },
+  "ssl-scan-timeout": {
+    remediation: "Sunucunun 443 üzerinden erişilebilir olduğunu doğrulayıp bir süre sonra yeniden tarayın.",
+    risk: "TLS sonucu alınamadı; sertifika ve şifreleme durumu bu turda değerlendirilemedi.",
+  },
+  "ssl-scan-error": {
+    remediation: "Hosting veya BT ekibinden HTTPS ve sertifika zincirini kontrol ettirin; ardından yeniden tarayın.",
+    risk: "TLS kontrolü kesildi; güvenlik puanı eksik veriyle hesaplanmış olabilir.",
+  },
+  "ssl-check-error": {
+    remediation: "BT veya hosting desteğinden SSL ve site erişimini kontrol ettirin.",
+    risk: "Şifreleme durumu belirsiz kalır; müşteri güveni ve uyumluluk riskleri artabilir.",
+  },
+  "ssl-cert-validation": {
+    remediation:
+      "SSL sertifikanızın süresi, zinciri ve sunucu ayarları için hosting veya BT ekibinizden kontrol ve gerekirse yenileme isteyin.",
+    risk: "Ziyaretçiler uyarılı sayfalar görebilir; iletişim ve alışveriş güveni zedelenir.",
+  },
+  "ssl-cert-expired": {
+    remediation:
+      "Hosting sağlayıcınızdan SSL sertifikanızı acilen yenilemesini isteyin; otomatik yenileme açık olsun.",
+    risk: "Müşterilerinizin tarayıcısı sitenizi güvensiz gösterebilir; veri ve itibar riski yüksektir.",
+  },
+  "ssl-cert-expiring-soon": {
+    remediation: "Sertifika yenileme tarihini takvime alın veya otomatik yenilemeyi etkinleştirin.",
+    risk: "Süre dolunca site uyarılı görünür; kesinti ve güven kaybı yaşanabilir.",
+  },
+  "ssl-cert-chain": {
+    remediation: "Hosting panelinden veya BT ekibinden eksiksiz ara sertifika zincirini yüklemesini isteyin.",
+    risk: "Bazı cihazlar bağlantıyı reddedebilir; müşteri ve iş ortağı erişimi kesilebilir.",
+  },
+  "ssl-protocol-deprecated": {
+    remediation: "Sunucuda TLS 1.2 veya üzeri kullanılacak şekilde yapılandırma yaptırın; eski protokolleri kapatın.",
+    risk: "Eski TLS sürümleri bilinen saldırılara açıktır; düzenleyici ve müşteri beklentilerini karşılamayabilir.",
+  },
+  "hibp-scan-timeout": {
+    remediation: "Bir süre sonra yeniden tarayın; HIBP API anahtarınızın geçerli olduğunu kontrol edin.",
+    risk: "İhlal bilgisi bu turda alınamadı; risk değerlendirmesi eksik kalabilir.",
+  },
+  "hibp-scan-error": {
+    remediation: "API anahtarı ve ağ bağlantınızı kontrol edip yeniden deneyin.",
+    risk: "İhlal verisi alınamazsa önlem almak gecikebilir.",
+  },
+  "headers-scan-timeout": {
+    remediation: "Site yanıt süresini iyileştirin veya bir süre sonra yeniden tarayın.",
+    risk: "Güvenlik başlıkları bu turda okunamadı; eksik puan oluşabilir.",
+  },
+  "headers-scan-error": {
+    remediation: "Sitenin dışarıdan erişilebilir olduğunu doğrulayıp yeniden tarayın.",
+    risk: "Başlık analizi yapılamadı; gerçek koruma seviyesi bilinmez.",
+  },
+  "robots-scan-timeout": {
+    remediation: "robots.txt erişimini ve sunucu yükünü kontrol edip yeniden tarayın.",
+    risk: "robots analizi atlandı; hassas yol ipuçları tespit edilememiş olabilir.",
+  },
+  "robots-scan-error": {
+    remediation: "robots.txt URL’sinin doğru olduğunu ve engel olmadığını kontrol edin.",
+    risk: "robots kontrolü başarısız; ilgili bulgular bu turda üretilemedi.",
+  },
+  "whois-scan-timeout": {
+    remediation: "WhoAPI yanıt süresini kontrol edin veya daha sonra yeniden tarayın.",
+    risk: "WHOIS bilgisi bu turda alınamadı; yaş sinyali eksik kalabilir.",
+  },
+  "whois-scan-error": {
+    remediation: "API anahtarı ve kotayı doğrulayıp yeniden deneyin.",
+    risk: "WHOIS verisi alınamadı; ek risk sinyalleri kaçabilir.",
+  },
   "ssl-grade-weak": {
     remediation:
       "Hosting sağlayıcınızdan SSL sertifikanızı güncel ve güvenli ayarlarla yapılandırmasını isteyin. Birçok sağlayıcı Let's Encrypt ile ücretsiz ve güçlü sertifika sunar.",

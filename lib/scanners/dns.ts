@@ -100,6 +100,8 @@ export interface DnsScanResult {
     txt: string[];
     dmarc: string | null;
     spf: string | null;
+    skipped?: boolean;
+    error?: string;
   };
 }
 

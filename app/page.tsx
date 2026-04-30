@@ -25,7 +25,7 @@ export default function Home() {
           Siber güvenlik riskini otomatik ölçün
         </h1>
         <p className="mt-4 text-slate-600 dark:text-slate-400">
-          DNS, DMARC, SSL Labs ve veri ihlali sinyallerini tek skorda birleştirin.
+          DNS, DMARC, TLS/sertifika ve veri ihlali sinyallerini tek skorda birleştirin.
           PDF rapor ile paylaşın.
         </p>
         <div className="mt-8 flex flex-wrap gap-3 justify-center">

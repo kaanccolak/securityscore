@@ -2,6 +2,9 @@
   "name": "security-score",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,7 +18,8 @@
     "@vercel/functions": "^3.4.5",
     "next": "14.2.35",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "ssl-checker": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

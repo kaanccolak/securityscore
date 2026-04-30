@@ -9,7 +9,7 @@ export default function ScanPage() {
       <div>
         <h1 className="text-2xl font-semibold">Güvenlik taraması</h1>
         <p className="text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
-          Alan adınız için DNS, SSL Labs, güvenlik başlıkları ve yapılandırılmışsa
+          Alan adınız için DNS, TLS/sertifika, güvenlik başlıkları ve yapılandırılmışsa
           Have I Been Pwned kontrolleri çalıştırılır. Sonuçlar birkaç dakika sürebilir.
         </p>
       </div>
